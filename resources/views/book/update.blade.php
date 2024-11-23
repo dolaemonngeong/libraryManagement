@@ -58,9 +58,9 @@
         @if($errors->has('categories'))
             <p class="text-danger">{{ $errors->first('categories') }}</p>
         @endif
-        @foreach($errors->get('categories.*') as $error)
+        {{-- @foreach($errors->get('categories.*') as $error)
             <p class="text-danger">{{ $error[0] }}</p>
-        @endforeach
+        @endforeach --}}
         
     </div>
 
