@@ -1,5 +1,6 @@
 @extends('layouts.app')
 
+
 @section('contents')
 
 @if(session('success'))
@@ -14,7 +15,6 @@
     <thead class="thead-light">
         <tr>
             <th scope="col">ID</th>
-            <th scope="col">Member</th>
             <th scope="col">Title</th>
             <th scope="col">Year Release</th>
             <th scope="col">Author</th>
@@ -27,11 +27,11 @@
             @foreach($books as $book)
         <tr>
             <th scope="row">{{ $loop->iteration }}</th>
-            @if($book->member->name)
+            {{-- @if($book->member->name)
             <td>{{ $book->member->name }}</td>
             @else
             <td>No member</td>
-            @endif
+            @endif --}}
             <td>{{ $book['title'] }}</td>
             <td>{{ $book['year_release'] }}</td>
             <td>{{ $book['author'] }}</td>
@@ -69,5 +69,33 @@
         </tr>
     </tbody>
 </table>
+
+<h1>Table Member Borrow Book</h1>
+<table class="table table-bordered">
+    <thead class="thead-light">
+        <tr>
+            <th scope="col">ID</th>
+            <th scope="col">Member</th>
+            <th scope="col">Title</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            @foreach($books as $book)
+        <tr>
+            <th scope="row">{{ $loop->iteration }}</th>
+            @if($book->member->name)
+            <td>{{ $book->member->name }}</td>
+            @else
+            <td>No member</td>
+            @endif
+            <td>{{ $book['title'] }}</td>
+
+        </tr>
+        @endforeach
+        </tr>
+    </tbody>
+</table>
+
 
 @endsection
