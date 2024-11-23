@@ -8,9 +8,9 @@
 </div>
 @endif
 
-<a class="btn btn-primary" href="{{ route("books.create") }}" role="button">Add New Book</a>
+<a class="btn btn-primary mb-3" href="{{ route("books.create") }}" role="button">Add New Book</a>
 
-<table class="table">
+<table class="table table-bordered">
     <thead class="thead-light">
         <tr>
             <th scope="col">ID</th>
@@ -37,14 +37,15 @@
             <td>{{ $book['author'] }}</td>
 
             @if($book->categories)
-            @foreach ($book->categories as $category) 
             <div class="mt-2">
             <td>
+            @foreach ($book->categories as $category) 
             {{ $category->name }}
+            <br>
+            @endforeach
+            
             </td>
             </div>
-            
-            @endforeach
             @else
             <td>No Category</td>
             @endif

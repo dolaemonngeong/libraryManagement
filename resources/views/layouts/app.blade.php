@@ -16,6 +16,9 @@
 <body>
     @include('layouts.navigation')
 
-    @yield('contents')
+    <div class="p-5">
+        @yield('contents')
+    </div>
 </body>
+
 </html>

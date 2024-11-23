@@ -10,13 +10,13 @@
                 <ul class="navbar-nav ms-auto"> 
                 {{-- me-auto mb-2 mb-lg-0 --}}
                     <li class="nav-item">
-                        <a class="nav-link " aria-current="page" href="/book">Book</a>
+                        <a class="nav-link " href="{{ route('books.index') }}">Book</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link " href="{{ route('categories.index') }}">Category</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link " href="/members">Member</a>
+                        <a class="nav-link " href="{{ route('members.index') }}">Member</a>
                     </li>
                 </ul>
             </div>

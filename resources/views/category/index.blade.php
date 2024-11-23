@@ -8,9 +8,9 @@
     </div>
 @endif
 
-<a class="btn btn-primary" href="{{ route("categories.create") }}" role="button">Add New Category</a>
+<a class="btn btn-primary mb-3" href="{{ route("categories.create") }}" role="button" >Add New Category</a>
 
-<table class="table">
+<table class="table table-bordered">
   <thead class="thead-light">
     <tr>
       <th scope="col">ID</th>

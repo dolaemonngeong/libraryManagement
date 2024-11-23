@@ -1,5 +1,5 @@
 @extends('layouts.app')
 
 @section('contents')
-<p> Welcome to the Library Management</p>
+<h1> Welcome to the Library Management</h1>
 @endsection

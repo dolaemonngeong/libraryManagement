@@ -25,5 +25,5 @@ Route::resource('categories', CategoryController::class);
 Route::resource('members', MemberController::class);
 
 // Route::get('/category', [CategoryController::class, 'index']);
-Route::get('/book', [BookController::class, 'index']);
-Route::get('/member', [MemberController::class, 'index']);
+// Route::get('/book', [BookController::class, 'index']);
+// Route::get('/member', [MemberController::class, 'index']);

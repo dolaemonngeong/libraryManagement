@@ -85,7 +85,7 @@ class BookController extends Controller
             'title' => 'required|string',
             'year_release' => 'required|string|min:4|max:4',
             'author' => 'required|string',
-            'categories' => 'required|array',
+            'categories[]' => 'required|array',
             'categories.*' => 'exists:categories,id',
             'member_id' => 'required'
         ]);
