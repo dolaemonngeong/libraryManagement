@@ -51,7 +51,7 @@ class MemberController extends Controller
             'phone_number' => $request->phone_number,
         ]);
 
-        return redirect()->route('members.index')->with('success', 'A member created successfully!');
+        return redirect()->route('members.index')->with('success', 'Member created successfully!');
             // return $request;
     }
 
@@ -78,6 +78,13 @@ class MemberController extends Controller
      */
     public function update(UpdateMemberRequest $request, $id)
     {
+        $this->validate($request, [
+            'name' => 'required|string|max:50',
+            'address' => 'required|string',
+            'email' => 'required|string',
+            'phone_number' => 'required|string',
+        ]);
+
         $member = Member::findOrFail($id);
 
         $member->update([
@@ -87,7 +94,7 @@ class MemberController extends Controller
             "phone_number"=> $request->phone_number,
         ]);
         
-        return redirect()->route('members.index')->with('success', 'member updated successfully!');
+        return redirect()->route('members.index')->with('success', 'Member updated successfully!');
 
     }
 

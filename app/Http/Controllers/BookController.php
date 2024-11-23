@@ -69,11 +69,19 @@ class BookController extends Controller
      */
     public function edit($id)
     {
-        return view("book.update", [
-            "book"=>Book::findOrFail($id),
-            'categories' => Category::all(),
-            'members' => Member::whereDoesntHave('books')->get()
-        ]);
+        // return view("book.update", [
+        //     "book"=>Book::findOrFail($id),
+        //     'categories' => Category::all(),
+        //     'members' => Member::all()
+        // ]);
+
+        $book = Book::with('categories')->findOrFail($id);
+        $members = Member::whereDoesntHave('books', function ($query) use ($book) {
+            $query->where('id', '!=', $book->id); // Include only eligible members
+        })->orWhere('id', $book->member_id)->get();
+        $categories = Category::all();
+
+        return view('book.update', compact('book', 'members', 'categories'));
     }
 
     /**
@@ -81,6 +89,7 @@ class BookController extends Controller
      */
     public function update(UpdateBookRequest $request, $id)
     {
+        
         $this->validate($request, [
             'title' => 'required|string',
             'year_release' => 'required|string|min:4|max:4',
@@ -93,12 +102,12 @@ class BookController extends Controller
 
         $book = Book::findOrFail($id);
 
-        $selectedMember = Member::findOrFail($request->member_id);
+        // $selectedMember = Member::findOrFail($request->member_id);
 
-        if ($selectedMember->book && $selectedMember->book->id !== $book->id) {
-            // If the selected member already has another book
-            return back()->withErrors(['member_id' => 'This member is already borrowing another book.']);
-        }
+        // if ($selectedMember->book && $selectedMember->book->id !== $book->id) {
+        //     // If the selected member already has another book
+        //     return back()->withErrors(['member_id' => 'This member is already borrowing another book.']);
+        // }
     
 
         $book->update([

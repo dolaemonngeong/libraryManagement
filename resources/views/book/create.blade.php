@@ -7,7 +7,7 @@
     <div class="mb-3">
         <label for="members">Member</label>
         @if($members->isEmpty())
-        <p class="text-danger">No available members to assign this book.</p>
+        <p class="text-danger">No available members to assign this book. Please Add New Members!</p>
         @else
         <select name="member_id" id="members" class="form-select">
             @foreach($members as $member)
@@ -31,7 +31,7 @@
 
     <div class="mb-3">
         <label for="">Year Release</label>
-        <input type="text" name="year_release" class="form-control">
+        <input type="number" name="year_release" class="form-control">
         @if($errors->has('year_release'))
         <p class="text-danger">{{ $errors->first('year_release')}}</p>
         @endif
@@ -49,7 +49,7 @@
         <label for="">Category</label>
         @foreach($categories as $category)
         <br>
-        <input class="form-check-input" type="checkbox" name="categories" value="{{ $category->id }}">
+        <input class="form-check-input" type="checkbox" name="categories[]" value="{{ $category->id }}">
         <label class="form-check-label" for="defaultCheck1">
             {{ $category->name }}
         </label>

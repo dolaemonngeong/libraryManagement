@@ -73,6 +73,9 @@ class CategoryController extends Controller
      */
     public function update(UpdateCategoryRequest $request, $id)
     {
+        $this->validate($request, [
+            'name' => 'required|string|max:50',
+        ]);
         
         $category = Category::findOrFail($id);
 
