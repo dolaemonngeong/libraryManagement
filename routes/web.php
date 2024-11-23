@@ -1,5 +1,8 @@
 <?php
 
+use App\Http\Controllers\BookController;
+use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\MemberController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,5 +17,13 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('home.index');
 });
+
+Route::resource('books', BookController::class);
+Route::resource('categories', CategoryController::class);
+Route::resource('members', MemberController::class);
+
+// Route::get('/category', [CategoryController::class, 'index']);
+Route::get('/book', [BookController::class, 'index']);
+Route::get('/member', [MemberController::class, 'index']);
