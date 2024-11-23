@@ -48,15 +48,20 @@
         <label for="">Category</label>
         @foreach($categories as $category)
         <br>
-        <input class="form-check-input" type="checkbox" name="categories[]" value="{{ $category->id }}"
-            {{ $book->categories->contains($category->id) ? 'checked' : ''}}>
+        <input class="form-check-input" type="checkbox" name="categories[]" value="{{ $category->id }}" {{ $book->categories->contains($category->id) ? 'checked' : '' }}>
+
         <label class="form-check-label" for="defaultCheck1">
             {{ $category->name }}
         </label>
         @endforeach
-        {{-- @foreach($errors->get('categories.*') as $error)
-        <p class="text-danger">{{ $error[0] }}</p>
-        @endforeach --}}
+        
+        @if($errors->has('categories'))
+            <p class="text-danger">{{ $errors->first('categories') }}</p>
+        @endif
+        @foreach($errors->get('categories.*') as $error)
+            <p class="text-danger">{{ $error[0] }}</p>
+        @endforeach
+        
     </div>
 
 

@@ -94,7 +94,7 @@ class BookController extends Controller
             'title' => 'required|string',
             'year_release' => 'required|string|min:4|max:4',
             'author' => 'required|string',
-            'categories[]' => 'required|array',
+            'categories' => 'required|array',
             'categories.*' => 'exists:categories,id',
             'member_id' => 'required'
         ]);
@@ -117,10 +117,11 @@ class BookController extends Controller
             'member_id' => $request->member_id
         
         ]);
+
         $book->categories()->sync($request->categories);
 
         return redirect()->route('books.index')->with('success', 'Book updated successfully!');
-
+            // return $request->all();
     }
 
     /**
