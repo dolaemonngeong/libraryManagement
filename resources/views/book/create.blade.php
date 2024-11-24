@@ -6,8 +6,12 @@
     @csrf
     <div class="mb-3">
         <label for="members">Member</label>
+
+        {{-- jika seluruh member pinjam semua buku, maka tampilkan kalau tidak ada member yang bisa meminjam buku --}}
         @if($members->isEmpty())
         <p class="text-danger">No available members to assign this book. Please Add New Members!</p>
+
+        {{-- jika ada member yang bisa pinjam buku, maka tampilkan seluruh nama member yang bisa pinjam buku  --}}
         @else
         <select name="member_id" id="members" class="form-select">
             @foreach($members as $member)
@@ -15,6 +19,8 @@
             @endforeach
         </select>
         @endif
+
+        {{-- jika kosong, tampilkan text error --}}
         @if($errors->has('member_id'))
         <p class="text-danger">{{ $errors->first('member')}}</p>
         @endif

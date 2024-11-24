@@ -27,6 +27,8 @@ class BookController extends Controller
     {
         return view('book.create',[
             'categories' => Category::all(),
+
+            // filter member yang belum pernah pinjam buku
             'members' => Member::whereDoesntHave('books')->get()
         ]);
     }
@@ -42,7 +44,9 @@ class BookController extends Controller
             'title' => 'required|string',
             'year_release' => 'required|string',
             'author' => 'required|string',
-            'categories' => 'required|array',
+            // memastikan categories itu array
+            'categories' => 'required|array', 
+            // memastikan setiap categories ada
             'categories.*' => 'exists:categories,id',
             'member_id*' => 'required'
         ]);
@@ -76,9 +80,12 @@ class BookController extends Controller
         // ]);
 
         $book = Book::with('categories')->findOrFail($id);
+
+        // filter member yang belum pinjam buku & dapat menampilkan 1 member yang sedang pinjam pada bagian edit
         $members = Member::whereDoesntHave('books', function ($query) use ($book) {
-            $query->where('id', '!=', $book->id); // Include only eligible members
+            $query->where('id', '!=', $book->id); 
         })->orWhere('id', $book->member_id)->get();
+
         $categories = Category::all();
 
         return view('book.update', compact('book', 'members', 'categories'));
@@ -94,8 +101,12 @@ class BookController extends Controller
             'title' => 'required|string',
             'year_release' => 'required|string|min:4|max:4',
             'author' => 'required|string',
-            'categories' => 'required|array',
+
+            // memastikan categories itu array
+            'categories' => 'required|array', 
+            // memastikan setiap categories ada
             'categories.*' => 'exists:categories,id',
+            
             'member_id' => 'required'
         ]);
 
