@@ -42,7 +42,7 @@ class BookController extends Controller
 
         $this->validate($request, [
             'title' => 'required|string',
-            'year_release' => 'required|string',
+            'year_release' => 'required|string|min:4|max:4',
             'author' => 'required|string',
             // memastikan categories itu array
             'categories' => 'required|array', 
